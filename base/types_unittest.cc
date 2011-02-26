@@ -6,12 +6,12 @@ namespace floatprof {
 TEST(TypesTest, TestValidSizes) {
   Instruction instr;
 
-  ASSERT_EQ(16, sizeof(instr) );
-  ASSERT_EQ(16, sizeof(instr.opcode) );
-  ASSERT_EQ(16, sizeof(instr.iopcode) );
+  ASSERT_EQ(16u, sizeof(instr) );
+  ASSERT_EQ(16u, sizeof(instr.opcode) );
+  ASSERT_EQ(16u, sizeof(instr.iopcode) );
 
-  ASSERT_EQ(sizeof(float), sizeof(Float));//NOLINT
-  ASSERT_EQ(sizeof(double), sizeof(Double));//NOLINT
-  ASSERT_EQ(sizeof(long double), sizeof(LongDouble));//NOLINT
+  ASSERT_EQ(sizeof(float), sizeof(Float));  // NOLINT(runtime/sizeof)
+  ASSERT_EQ(sizeof(double), sizeof(Double));  // NOLINT(runtime/sizeof)
+  ASSERT_EQ(sizeof(long double), sizeof(LongDouble));  // NOLINT(runtime/sizeof)
 }
 }  // namespace floatprof

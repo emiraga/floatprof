@@ -24,6 +24,9 @@ namespace floatprof {
 SoftFloatFast::SoftFloatFast() {
 }
 
+SoftFloatFast::~SoftFloatFast() {
+}
+
 Float SoftFloatFast::add32(Float a, Float b) {
   return convert(float32_add(convert(a), convert(b)));
 }

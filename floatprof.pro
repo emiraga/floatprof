@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 QT       -= core
-
 QT       -= gui
 
 TARGET = floatprof
@@ -15,17 +14,24 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cc \
-    gmock-gtest-all.cc \
+    gmock/gmock-gtest-all.cc \
     softfloat/softfloatfast.cc \
     softfloat/softfloatfast_unittest.cc \
-    base/types_unittest.cc
+    base/types_unittest.cc \
+    debugger/ptracedebugger.cc \
+    debugger/instructionprint.cc
 
 HEADERS += \
-    types.h \
     softfloat/softfloat_interface.h \
     softfloat/softfloatfast.h \
-    base/types.h
+    base/types.h \
+    debugger/memoryreader.h \
+    debugger/debuggerinterface.h \
+    debugger/ptracedebugger.h \
+    debugger/instructionobserver.h \
+    debugger/instructionprint.h
 
+# Custom build step for softfloat
 softfloat2b.target = ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/softfloat.o
 softfloat2b.commands = make -C ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/
 softfloat2b.depends = FORCE
@@ -33,3 +39,11 @@ softfloat2b.depends = FORCE
 QMAKE_EXTRA_TARGETS += softfloat2b
 
 OBJECTS += ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/softfloat.o
+
+# Custom build step for asm_test
+asm_test.target = asm_test
+asm_test.depends = ../floatprof/asm/test.asm
+asm_test.commands = nasm -f elf $$asm_test.depends -o test.o && ld -s -o asm_test test.o
+QMAKE_EXTRA_TARGETS += asm_test
+
+POST_TARGETDEPS += asm_test

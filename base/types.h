@@ -8,8 +8,11 @@ namespace floatprof {
 #pragma pack(push) /* save current alignment */
 #pragma pack(1) /* remove alignment */
 union Instruction {
-  uint32_t iopcode[4];
-  uint8_t opcode[16];
+  enum {
+    SIZE32 = 4
+  };
+  uint32_t iopcode[SIZE32];
+  uint8_t opcode[SIZE32*4];
   struct {
     uint8_t opc;
     uint8_t opc2;
@@ -36,11 +39,12 @@ union Double {
 
 union LongDouble {
   enum {
-    SIZE32 = 3  // TODO(emiraga): should this be 4?
+    SIZE32 = 3
   };
   long double d;
   uint32_t i[SIZE32];
 };
+
 }  // namespace floatprof
 
 #endif  // BASE_TYPES_H_
