@@ -35,7 +35,6 @@ HEADERS += \
 softfloat2b.target = ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/softfloat.o
 softfloat2b.commands = make -C ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/
 softfloat2b.depends = FORCE
-
 QMAKE_EXTRA_TARGETS += softfloat2b
 
 OBJECTS += ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/softfloat.o
@@ -47,3 +46,16 @@ asm_test.commands = nasm -f elf $$asm_test.depends -o test.o && ld -s -o asm_tes
 QMAKE_EXTRA_TARGETS += asm_test
 
 POST_TARGETDEPS += asm_test
+
+# Custom build step for ndisasm
+NASMOBJ = nasm/disasm.o nasm/regdis.o nasm/insnsd.o \
+          nasm/nasmlib.o nasm/insnsn.o nasm/regs.o \
+          nasm/sync.o nasm/insnsb.o
+
+ndisasm.target = ../floatprof/nasm/disasm.o
+ndisasm.commands = cd ../floatprof/nasm/ && ./configure && make
+ndisasm.depends = FORCE
+QMAKE_EXTRA_TARGETS += ndisasm
+
+OBJECTS += $$NASMOBJ
+

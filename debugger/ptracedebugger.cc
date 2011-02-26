@@ -66,17 +66,17 @@ void PtraceDebugger::start() {
 }
 void PtraceDebugger::step() {
   // Fill register structures from user program
-  if(ptrace(PTRACE_GETREGS, pid_, NULL, &regs_) < 0) {
+  if (ptrace(PTRACE_GETREGS, pid_, NULL, &regs_) < 0) {
     perror("ptrace PTRACE_GETREGS");
     return;
   }
   // Fill extended floating point registers
-  if(ptrace(PTRACE_GETFPXREGS, pid_, NULL, &fpregs_) < 0) {
+  if (ptrace(PTRACE_GETFPXREGS, pid_, NULL, &fpregs_) < 0) {
     perror("ptrace PTRACE_GETFPXREGS");
     return;
   }
   // Read 32 bytes from eip which contains next instruction
-  for(int i = 0; i < instruction_.SIZE32; i++) {
+  for (int i = 0; i < instruction_.SIZE32; i++) {
     instruction_.iopcode[i] = get_uint32(
         reinterpret_cast<void*>(regs_.eip + (i*4)));
   }

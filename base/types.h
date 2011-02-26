@@ -9,7 +9,7 @@ namespace floatprof {
 #pragma pack(1) /* remove alignment */
 union Instruction {
   enum {
-    SIZE32 = 4
+    SIZE32 = 8  // This value is from NDISASM, seems too large to me.
   };
   uint32_t iopcode[SIZE32];
   uint8_t opcode[SIZE32*4];

@@ -6,9 +6,9 @@ namespace floatprof {
 TEST(TypesTest, TestValidSizes) {
   Instruction instr;
 
-  ASSERT_EQ(16u, sizeof(instr) );
-  ASSERT_EQ(16u, sizeof(instr.opcode) );
-  ASSERT_EQ(16u, sizeof(instr.iopcode) );
+  ASSERT_EQ(32u, sizeof(instr) );
+  ASSERT_EQ(32u, sizeof(instr.opcode) );
+  ASSERT_EQ(32u, sizeof(instr.iopcode) );
 
   ASSERT_EQ(sizeof(float), sizeof(Float));  // NOLINT(runtime/sizeof)
   ASSERT_EQ(sizeof(double), sizeof(Double));  // NOLINT(runtime/sizeof)

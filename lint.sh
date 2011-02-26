@@ -1,6 +1,6 @@
 #!/bin/sh
 
-files=`find . | egrep "\.cc$|\.h$" | egrep -v 'softfloat/bit|softfloat/proc|^./gmock|^./gtest'`
+files=`find . | egrep "\.cc$|\.h$" | egrep -v 'softfloat/bit|softfloat/proc|^\./gmock|^\./gtest|^\./nasm'`
 tail -n +8 < $0 | python - $files
 
 exit
