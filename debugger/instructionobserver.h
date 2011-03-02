@@ -4,13 +4,14 @@
 #define DEBUGGER_INSTRUCTIONOBSERVER_H_
 
 #include "base/types.h"
+#include "debugger/memoryreader.h"
 
 namespace floatprof {
 class InstructionObserver {
  public:
   virtual ~InstructionObserver() {}
 
-  virtual void notifyInstruction(const Instruction &) = 0;
+  virtual void notifyInstruction(MemoryReader *usermemory) = 0;
 };
 }  // namespace floatprof
 

@@ -10,6 +10,7 @@
 #include "softfloat/softfloatfast.h"
 #include "debugger/ptracedebugger.h"
 #include "debugger/instructionprint.h"
+#include "debugger/floatinstructions.h"
 
 using boost::shared_ptr;
 using boost::scoped_ptr;
@@ -22,6 +23,9 @@ bool test_main() {
 
   shared_ptr<InstructionObserver> printer(new InstructionPrint());
   debugger->addObserver(printer);
+
+  shared_ptr<FloatInstructions> floatintr(new FloatInstructions());
+  debugger->addObserver(floatintr);
 
   char *const args[] = {"./asm_test", NULL };
   if (debugger->Run(args))

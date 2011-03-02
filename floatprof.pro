@@ -16,10 +16,13 @@ TEMPLATE = app
 SOURCES += main.cc \
     gmock/gmock-gtest-all.cc \
     softfloat/softfloatfast.cc \
-    softfloat/softfloatfast_unittest.cc \
-    base/types_unittest.cc \
+    softfloat/test/softfloatfast_unittest.cc \
+    base/test/types_unittest.cc \
     debugger/ptracedebugger.cc \
-    debugger/instructionprint.cc
+    debugger/instructionprint.cc \
+    debugger/floatinstructions.cc \
+    debugger/test/instructionprint_unittest.cc \
+    debugger/test/debuggerinterface_unittest.cc
 
 HEADERS += \
     softfloat/softfloat_interface.h \
@@ -29,7 +32,10 @@ HEADERS += \
     debugger/debuggerinterface.h \
     debugger/ptracedebugger.h \
     debugger/instructionobserver.h \
-    debugger/instructionprint.h
+    debugger/instructionprint.h \
+    debugger/floatinstructions.h \
+    debugger/test/mockinstructionobserver.h \
+    debugger/test/mockdebuggerinterface.h
 
 # Custom build step for softfloat
 softfloat2b.target = ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/softfloat.o
@@ -52,10 +58,9 @@ NASMOBJ = nasm/disasm.o nasm/regdis.o nasm/insnsd.o \
           nasm/nasmlib.o nasm/insnsn.o nasm/regs.o \
           nasm/sync.o nasm/insnsb.o
 
-ndisasm.target = ../floatprof/nasm/disasm.o
+ndisasm.target = nasm/disasm.o
 ndisasm.commands = cd ../floatprof/nasm/ && ./configure && make
 ndisasm.depends = FORCE
 QMAKE_EXTRA_TARGETS += ndisasm
 
 OBJECTS += $$NASMOBJ
-

@@ -12,7 +12,8 @@ class InstructionPrint : public InstructionObserver {
   InstructionPrint();
   virtual ~InstructionPrint() {}
 
-  virtual void notifyInstruction(const Instruction &);
+  virtual void notifyInstruction(MemoryReader *usermemory);
+  void printToString(const uint8_t *instr, char *out, int buflen);
 };
 }  // namespace floatprof
 

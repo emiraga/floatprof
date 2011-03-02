@@ -15,6 +15,7 @@ class MemoryReader {
   virtual Float get_f32(void *addr) = 0;
   virtual uint32_t get_uint32(void *addr) = 0;
   virtual uint16_t get_uint16(void *addr) = 0;
+  virtual Instruction current_instruction() = 0;
 };
 }  // namespace floatprof
 

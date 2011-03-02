@@ -50,12 +50,12 @@ int PtraceDebugger::Run(char *const *args) {
         wait(&val);
         if (val != 1407)
           break;
-          step();
-        }
+        step();
         // continue to stop, wait and release until
         // the child is finished; val != 1407
         // Low=0177L and High=05 (SIGTRAP)
-        end();
+      }
+      end();
     }
   }
   return 0;
@@ -77,10 +77,10 @@ void PtraceDebugger::step() {
   }
   // Read 32 bytes from eip which contains next instruction
   for (int i = 0; i < instruction_.SIZE32; i++) {
-    instruction_.iopcode[i] = get_uint32(
+    instruction_.opcode32[i] = get_uint32(
         reinterpret_cast<void*>(regs_.eip + (i*4)));
   }
-  notifyObservers(instruction_);
+  notifyObservers(this);
 }
 void PtraceDebugger::end() {
   //
