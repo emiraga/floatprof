@@ -22,7 +22,9 @@ SOURCES += main.cc \
     debugger/instructionprint.cc \
     debugger/floatinstructions.cc \
     debugger/test/instructionprint_unittest.cc \
-    debugger/test/debuggerinterface_unittest.cc
+    debugger/test/debuggerinterface_unittest.cc \
+    profiler/printfloatingoperations.cc \
+    debugger/test/floatinstructions_unittest.cc
 
 HEADERS += \
     softfloat/softfloat_interface.h \
@@ -35,7 +37,11 @@ HEADERS += \
     debugger/instructionprint.h \
     debugger/floatinstructions.h \
     debugger/test/mockinstructionobserver.h \
-    debugger/test/mockdebuggerinterface.h
+    debugger/test/mockdebuggerinterface.h \
+    profiler/floatingobserver.h \
+    profiler/printfloatingoperations.h \
+    profiler/test/mockfloatingobserver.h \
+    debugger/test/mockmemoryreader.h
 
 # Custom build step for softfloat
 softfloat2b.target = ../floatprof/softfloat/softfloat/bits64/386-Win32-GCC/softfloat.o
@@ -64,3 +70,10 @@ ndisasm.depends = FORCE
 QMAKE_EXTRA_TARGETS += ndisasm
 
 OBJECTS += $$NASMOBJ
+
+# Google lint
+lint.target = lint
+lint.commands = ../floatprof/lint.sh
+lint.depends = FORCE
+QMAKE_EXTRA_TARGETS += lint
+PRE_TARGETDEPS += lint

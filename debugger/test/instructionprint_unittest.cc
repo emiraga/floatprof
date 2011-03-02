@@ -1,13 +1,13 @@
 // Copyright 2011, Emir Habul <emiraga@gmail.com>
 
-
 #include "gtest/gtest.h"
 #include "debugger/instructionprint.h"
 
 namespace floatprof {
-TEST(InstructionPrint, InstructionConversion) {
+
+TEST(PrintInstructions, InstructionConversion) {
   char output[256];
-  InstructionPrint print;
+  PrintInstructions print;
 
 #define TEST_INSTR_PRINT(data, expect) \
   print.printToString(reinterpret_cast<const uint8_t*>(data), output, 256); \
@@ -17,4 +17,5 @@ TEST(InstructionPrint, InstructionConversion) {
   TEST_INSTR_PRINT("\xd8\xc1\xdc\xc1\xd9\xee", "fadd st1");
 #undef TEST_INSTR_PRINT
 }
+
 }  // namespace floatprof

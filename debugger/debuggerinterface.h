@@ -8,7 +8,6 @@
 
 #include "debugger/instructionobserver.h"
 
-using std::vector;
 using boost::shared_ptr;
 using boost::weak_ptr;
 
@@ -31,7 +30,7 @@ class DebuggerInterface {
     }
   }
  private:
-  vector<weak_ptr<InstructionObserver> > observers_;
+  std::vector<weak_ptr<InstructionObserver> > observers_;
 };
 
 }  // namespace floatprof

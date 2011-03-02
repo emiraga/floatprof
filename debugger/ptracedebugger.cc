@@ -6,6 +6,7 @@
 #include <cstdio>
 
 namespace floatprof {
+
 PtraceDebugger::PtraceDebugger()
   : pid_(-1) {
 }
@@ -75,6 +76,7 @@ void PtraceDebugger::step() {
     perror("ptrace PTRACE_GETFPXREGS");
     return;
   }
+
   // Read 32 bytes from eip which contains next instruction
   for (int i = 0; i < instruction_.SIZE32; i++) {
     instruction_.opcode32[i] = get_uint32(
@@ -85,4 +87,5 @@ void PtraceDebugger::step() {
 void PtraceDebugger::end() {
   //
 }
+
 }  // namespace floatprof

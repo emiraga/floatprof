@@ -14,9 +14,9 @@ class PtraceDebugger : public DebuggerInterface, public MemoryReader {
  public:
   PtraceDebugger();
   virtual ~PtraceDebugger();
+  //  From DebuggerInterface
   virtual int Init();
   virtual int Run(char *const *args);
-  //  From DebuggerInterface
 
   //  From MemoryReader interface
   virtual LongDouble get_fx80_from_st(int st) {
@@ -26,16 +26,18 @@ class PtraceDebugger : public DebuggerInterface, public MemoryReader {
     return operand;
   }
   virtual LongDouble get_fx80(void *addr) {
+    uint32_t *user_addr = reinterpret_cast<uint32_t*>(addr);
     LongDouble operand;
-    operand.integers[0] = ptrace(PTRACE_PEEKDATA, pid_, addr, NULL);
-    operand.integers[1] = ptrace(PTRACE_PEEKDATA, pid_, addr + 4, NULL);
-    operand.integers[2] = ptrace(PTRACE_PEEKDATA, pid_, addr + 8, NULL);
+    operand.integers[0] = ptrace(PTRACE_PEEKDATA, pid_, user_addr, NULL);
+    operand.integers[1] = ptrace(PTRACE_PEEKDATA, pid_, user_addr + 1, NULL);
+    operand.integers[2] = ptrace(PTRACE_PEEKDATA, pid_, user_addr + 2, NULL);
     return operand;
   }
   virtual Double get_f64(void *addr) {
+    uint32_t *user_addr = reinterpret_cast<uint32_t*>(addr);
     Double operand;
-    operand.integers[0] = ptrace(PTRACE_PEEKDATA, pid_, addr, NULL);
-    operand.integers[1] = ptrace(PTRACE_PEEKDATA, pid_, addr + 4, NULL);
+    operand.integers[0] = ptrace(PTRACE_PEEKDATA, pid_, user_addr, NULL);
+    operand.integers[1] = ptrace(PTRACE_PEEKDATA, pid_, user_addr + 1, NULL);
     return operand;
   }
   virtual Float get_f32(void *addr) {

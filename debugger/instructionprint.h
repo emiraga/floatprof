@@ -7,10 +7,10 @@
 #include "debugger/instructionobserver.h"
 
 namespace floatprof {
-class InstructionPrint : public InstructionObserver {
+class PrintInstructions : public InstructionObserver {
  public:
-  InstructionPrint();
-  virtual ~InstructionPrint() {}
+  PrintInstructions();
+  virtual ~PrintInstructions() {}
 
   virtual void notifyInstruction(MemoryReader *usermemory);
   void printToString(const uint8_t *instr, char *out, int buflen);

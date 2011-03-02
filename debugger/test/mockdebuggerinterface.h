@@ -7,11 +7,13 @@
 #include "gmock/gmock.h"
 
 namespace floatprof {
+
 class MockDebuggerInterface : public DebuggerInterface {
  public:
   MOCK_METHOD0(Init, int());
   MOCK_METHOD1(Run, int(char *const *args));
 };
+
 }  // namespace floatprof
 
 #endif  // DEBUGGER_TEST_MOCKDEBUGGERINTERFACE_H_

@@ -19,15 +19,15 @@ SoftFloatFast::~SoftFloatFast() {
 }
 
 Float SoftFloatFast::add32(Float a, Float b) {
-  return ::softfloat::float32_add(a.softfloat, b.softfloat);
+  return Float(::softfloat::float32_add(a.softfloat, b.softfloat));
 }
 
 Double SoftFloatFast::add64(Double a, Double b) {
-  return ::softfloat::float64_add(a.softfloat, b.softfloat);
+  return Double(::softfloat::float64_add(a.softfloat, b.softfloat));
 }
 
 LongDouble SoftFloatFast::addx80(LongDouble a, LongDouble b) {
-  return ::softfloat::floatx80_add(a.softfloat, b.softfloat);
+  return LongDouble(::softfloat::floatx80_add(a.softfloat, b.softfloat));
 }
 
 }  // namespace floatprof

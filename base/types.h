@@ -39,7 +39,8 @@ union Float {
   ::softfloat::float32 softfloat;
 
   Float() {}
-  Float(::softfloat::float32 sf) : softfloat(sf) {}
+  explicit Float(::softfloat::float32 sf) : softfloat(sf) {}
+  explicit Float(float native) : native(native) {}
 };
 
 union Double {
@@ -51,7 +52,8 @@ union Double {
   ::softfloat::float64 softfloat;
 
   Double() {}
-  Double(::softfloat::float64 sf) : softfloat(sf) {}
+  explicit Double(::softfloat::float64 sf) : softfloat(sf) {}
+  explicit Double(double native) : native(native) {}
 };
 
 union LongDouble {
@@ -63,7 +65,11 @@ union LongDouble {
   ::softfloat::floatx80 softfloat;
 
   LongDouble() {}
-  LongDouble(::softfloat::floatx80 sf) : softfloat(sf) {}
+  explicit LongDouble(::softfloat::floatx80 sf) : softfloat(sf) {}
+  explicit LongDouble(long double native) : native(native) {}
+  bool operator==(LongDouble v) {
+    return native == v.native;
+  }
 };
 
 // CPU Instruction storage

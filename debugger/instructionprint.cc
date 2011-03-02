@@ -16,10 +16,10 @@ extern "C" {
 }  // namespace nasm
 
 namespace floatprof {
-InstructionPrint::InstructionPrint() {
+PrintInstructions::PrintInstructions() {
 }
 
-void InstructionPrint::notifyInstruction(MemoryReader *usermemory) {
+void PrintInstructions::notifyInstruction(MemoryReader *usermemory) {
   Instruction instr = usermemory->current_instruction();
   char output[256] = {0};
   printToString(instr.opcode8, output, sizeof(output));
@@ -30,7 +30,7 @@ void InstructionPrint::notifyInstruction(MemoryReader *usermemory) {
          output);
 }
 
-void InstructionPrint::printToString(const uint8_t *instr, char *output,
+void PrintInstructions::printToString(const uint8_t *instr, char *output,
                                      int buffer_length) {
   nasm::disasm(const_cast<uint8_t*>(instr), output, buffer_length,
                32, 0, false, 0);
