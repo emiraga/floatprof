@@ -1,7 +1,11 @@
 // Copyright 2011, Emir Habul <emiraga@gmail.com>
 
-#include "gtest/gtest.h"
 #include "debugger/instructionprint.h"
+#include "debugger/test/mockmemoryreader.h"
+
+#include "gtest/gtest.h"
+
+using testing::Return;
 
 namespace floatprof {
 
@@ -19,6 +23,20 @@ TEST(PrintInstructions, InstructionConversion) {
   TEST_INSTR_PRINT("\xDC\x2D\x00\x00\x00\x00", "fsubr qword [dword 0x0]");
 
 #undef TEST_INSTR_PRINT
+}
+
+TEST(PrintInstructions, printing) {
+  MockMemoryReader memory;
+  Instruction instr = {};
+  instr.opcode8[0] = 0xcd;
+  instr.opcode8[1] = 0x80;
+
+  EXPECT_CALL(memory, current_instruction())
+      .Times(1)
+      .WillOnce(Return(instr));
+
+  PrintInstructions print;
+  print.notifyInstruction(&memory);
 }
 
 }  // namespace floatprof

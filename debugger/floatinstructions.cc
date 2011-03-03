@@ -7,8 +7,7 @@
 
 namespace floatprof {
 
-FloatInstructions::FloatInstructions() {
-}
+FloatInstructions::FloatInstructions() { }
 
 void FloatInstructions::notifyInstruction(MemoryReader *user) {
   // Get current instruction from debugee
@@ -35,9 +34,11 @@ void FloatInstructions::notifyInstruction(MemoryReader *user) {
     found_add(user->get_fx80_from_st(0), user->get_fx80_from_st(regm), eopc);
   } else if (opc == 0xDC && mod == 3) {
     // fadd stN, st0
+    if (eopc) eopc ^= 1;  // transform eopc for inverse operations
     found_add(user->get_fx80_from_st(regm), user->get_fx80_from_st(0), eopc);
   } else if (opc == 0xDE && mod == 3) {
     // faddp [stN]
+    if (eopc) eopc ^= 1;  // transform eopc for inverse operations
     found_add(user->get_fx80_from_st(regm), user->get_fx80_from_st(0), eopc);
   } else if (opc == 0xDA && mod == 0) {
     // fiadd dword [addr]

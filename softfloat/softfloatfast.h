@@ -11,7 +11,7 @@ class SoftFloatFast : public SoftFloatInterface {
   virtual ~SoftFloatFast();
   virtual Float add32(Float a, Float b);
   virtual Double add64(Double a, Double b);
-  virtual LongDouble addx80(LongDouble, LongDouble);
+  virtual LongDouble addx80(LongDouble a, LongDouble b);
 };
 }  // namespace
 

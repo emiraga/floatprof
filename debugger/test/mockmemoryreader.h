@@ -4,6 +4,7 @@
 #define DEBUGGER_TEST_MOCKMEMORYREADER_H_
 
 #include "debugger/memoryreader.h"
+#include "gmock/gmock.h"
 
 namespace floatprof {
 
