@@ -20,6 +20,7 @@ void FloatInstructions::notifyInstruction(MemoryReader *user) {
   void *pointer = instruction.ccp.pointer;
 
   bool valid_eopc = (eopc == 0 || eopc == 4 || eopc == 5);
+
   if (!valid_eopc)
     return;
 
@@ -60,8 +61,6 @@ void FloatInstructions::found_add(LongDouble a, FT b_t, int eopc) {
     return;
   case 0:  // addition
     notifyObserversAdd(a, b);
-    return;
-  default:
     return;
   }
 }

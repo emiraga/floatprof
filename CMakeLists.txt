@@ -70,6 +70,11 @@ add_executable ( testfloatprof
     ${main_extra_deps}
 )
 target_link_libraries ( testfloatprof ${main_libs} )
+set_target_properties ( testfloatprof PROPERTIES
+	COMPILE_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage"
+	LINK_FLAGS "-fprofile-arcs"
+	EXCLUDE_FROM_DEFAULT_BUILD 1
+)
 
 add_custom_target ( google_lint ALL
     COMMAND ${CMAKE_SOURCE_DIR}/lint.sh
@@ -83,4 +88,13 @@ add_custom_target ( asm_test
 )
 
 add_dependencies ( floatprof asm_test )
+
+include(CTest)
+ADD_TEST(floatprof ${EXEC_DIR}/testfloatprof)
+
+add_custom_target ( coverage
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+	COMMAND make && ctest -VV && make ExperimentalCoverage || exit
+	COMMAND grep "\\\#\\\#\\\#\\\#" Testing/CoverageInfo/*.cc.gcov | egrep -v "ptracedebugger.cc.gcov:\\|gmock-gtest-all.cc.gcov:"
+)
 
