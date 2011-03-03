@@ -42,9 +42,6 @@ bool test_main() {
 }  // namespace floatprof
 
 int main(int argc, char *argv[]) {
-  if (argc > 1 && strncmp(argv[1], "--gtest", 7) == 0) {
-    testing::InitGoogleMock(&argc, argv);
-    return RUN_ALL_TESTS();
-  }
   return floatprof::test_main();
 }
+

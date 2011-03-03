@@ -1,5 +1,6 @@
 *.o
-floatprof.pro.user*
+*.a
+CMakeLists.txt.user*
 
 nasm/Makefile
 nasm/config.h
