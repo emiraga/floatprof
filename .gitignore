@@ -1,1 +1,11 @@
 *.o
+floatprof.pro.user*
+
+nasm/Makefile
+nasm/config.h
+nasm/config.log
+nasm/config.status
+nasm/nasm.man
+nasm/ndisasm.man
+nasm/rdoff/Makefile
+

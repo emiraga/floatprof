@@ -16,9 +16,6 @@ milieu.h: $(PROCESSOR_H)
 softfloat$(OBJ): milieu.h softfloat.h softfloat-specialize $(SOFTFLOAT_MACROS) ../softfloat.c
 	$(COMPILE_C) ../softfloat.c
 
-softfloat.E.c: milieu.h softfloat.h softfloat-specialize $(SOFTFLOAT_MACROS) ../softfloat.c
-	$(COMPILE_C) ../softfloat.c -E
-
 timesoftfloat$(OBJ): milieu.h softfloat.h ../timesoftfloat.c
 	$(COMPILE_C) ../timesoftfloat.c
 

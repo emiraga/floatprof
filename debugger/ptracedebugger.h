@@ -21,7 +21,7 @@ class PtraceDebugger : public DebuggerInterface, public MemoryReader {
   //  From MemoryReader interface
   virtual LongDouble get_fx80_from_st(int st) {
     LongDouble operand;
-    for (int k = 0; k < 4; k++)
+    for (int k = 0; k < LongDouble::SIZE32; k++)
       operand.integers[k] = fpregs_.st_space[k + 4*st];
     return operand;
   }
