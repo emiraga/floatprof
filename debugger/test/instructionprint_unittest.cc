@@ -15,6 +15,9 @@ TEST(PrintInstructions, InstructionConversion) {
 
   TEST_INSTR_PRINT("\xcd\x80\xbb\x00\x00\x00", "int 0x80");
   TEST_INSTR_PRINT("\xd8\xc1\xdc\xc1\xd9\xee", "fadd st1");
+  TEST_INSTR_PRINT("\xDC\x25\x00\x00\x00\x00", "fsub qword [dword 0x0]");
+  TEST_INSTR_PRINT("\xDC\x2D\x00\x00\x00\x00", "fsubr qword [dword 0x0]");
+
 #undef TEST_INSTR_PRINT
 }
 

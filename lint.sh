@@ -1,7 +1,8 @@
 #!/bin/sh
 maindir=`dirname $0`
-files=`find $maindir | egrep "\.cc$|\.h$" | egrep -v '/softfloat/bit|/softfloat/proc|/gmock/gmock|/gtest/gtest|/nasm/'`
-tail -n +8 < $0 | python - $files
+files=`find $maindir | egrep "\.cc$|\.h$|\.cpp$|\.cxx$" | \
+	egrep -v "^$maindir/softfloat/softfloat/bit|^$maindir/softfloat/proc|^$maindir/gmock/|^$maindir/gtest/|^$maindir/nasm/"`
+tail -n +10 < $0 | python - $files
 
 exit
 

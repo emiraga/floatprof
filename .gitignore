@@ -8,4 +8,15 @@ nasm/config.status
 nasm/nasm.man
 nasm/ndisasm.man
 nasm/rdoff/Makefile
+nasm/nasm
+nasm/ndisasm
+nasm/rdoff/ldrdf
+nasm/rdoff/rdf2bin
+nasm/rdoff/rdf2com
+nasm/rdoff/rdf2ihx
+nasm/rdoff/rdf2ith
+nasm/rdoff/rdf2srec
+nasm/rdoff/rdfdump
+nasm/rdoff/rdflib
+nasm/rdoff/rdx
 
